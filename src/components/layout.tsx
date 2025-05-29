@@ -1,8 +1,15 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from "react";
+import { ThemeToggleButton } from "./themetogglebutton";
 
 type Props = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
+
 export const Layout = ({ children }: Props) => {
-  return <div className="container">{children}</div>
-}
+  return (
+    <>
+      <ThemeToggleButton />
+      <div className="container">{children}</div>
+    </>
+  );
+};
