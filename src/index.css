@@ -84,6 +84,36 @@ body {
   color: var(--text);
 }
 
+.light-theme .filter-input-group input[type="text"] {
+  border: 1px solid #ced4da;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.light-theme .filter-input-group input[type="text"]::placeholder {
+  color: var(--text-secondary);
+}
+
+.light-theme .filter-input-group input[type="text"]:disabled {
+  background-color: #e9ecef;
+  color: #adb5bd;
+  border-color: #dee2e6;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.light-theme .filter-input-group input[type="text"]:disabled::placeholder {
+  color: #adb5bd;
+  opacity: 0.7;
+}
+
+.empty-state-message {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
 .light-theme .todo-detail-card {
   background-color: var(--surface);
   box-shadow: var(--shadow);
@@ -128,6 +158,48 @@ h1 {
   padding: 0.5rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.filter-input-group {
+  margin-bottom: 1.5rem;
+
+  display: flex;
+}
+
+.filter-input-group input[type="text"] {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--surface);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+  border-radius: var(--radius);
+  outline: none;
+  box-shadow: var(--shadow);
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.filter-input-group input[type="text"]::placeholder {
+  color: var(--text-secondary);
+}
+
+.filter-input-group input[type="text"]:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-hover), var(--shadow);
+}
+
+.filter-input-group input[type="text"]:disabled {
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.filter-input-group input[type="text"]:disabled::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
 input[type="text"],
@@ -190,7 +262,7 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid transparent; /* Prepare for light theme border */
+  border: 1px solid transparent;
 }
 
 li span {
