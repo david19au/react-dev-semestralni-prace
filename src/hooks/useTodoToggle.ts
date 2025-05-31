@@ -1,24 +1,57 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { ApiError, todoApi } from '../api/todoApi'
-import type { Todo, TodoToggle } from '../types'
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ApiError, todoApi } from "../api/todoApi";
+import type { Todo, TodoToggle } from "../types";
+
+interface ToggleTodoContext {
+  previousTodo?: Todo;
+  previousTodos?: Todo[];
+}
 
 export const useTodoToggle = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
-  return useMutation<Todo, ApiError, TodoToggle>({
-    mutationKey: ['toggleTodo'],
-    mutationFn: async (todoToggle: TodoToggle) => {
-      return await todoApi.toggleTodo(todoToggle)
+  return useMutation<Todo, ApiError, TodoToggle, ToggleTodoContext>({
+    mutationFn: (todoToggle: TodoToggle) => todoApi.toggleTodo(todoToggle),
+    onMutate: async (variables: TodoToggle) => {
+      await queryClient.cancelQueries({ queryKey: ["todo", variables.id] });
+      await queryClient.cancelQueries({ queryKey: ["todos"] });
+
+      const previousTodo = queryClient.getQueryData<Todo>([
+        "todo",
+        variables.id,
+      ]);
+      const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]);
+
+      if (previousTodo) {
+        queryClient.setQueryData<Todo>(["todo", variables.id], {
+          ...previousTodo,
+          completed: variables.completed,
+        });
+      }
+      queryClient.setQueryData<Todo[]>(["todos"], (oldTodos) =>
+        oldTodos?.map((todo) =>
+          todo.id === variables.id
+            ? { ...todo, completed: variables.completed }
+            : todo
+        )
+      );
+      return { previousTodo, previousTodos };
     },
-    onMutate: (todoToggle) => {
-      const previousTodos = queryClient.getQueryData<Todo[]>(['todos'])
-      queryClient.setQueryData<Todo[]>(['todos'], (old) => {
-        return old?.map((todo) => (todo.id === todoToggle.id ? { ...todo, completed: todoToggle.completed } : todo))
-      })
-      return { previousTodos }
+    onError: (err, variables, context) => {
+      if (context?.previousTodo) {
+        queryClient.setQueryData<Todo>(
+          ["todo", variables.id],
+          context.previousTodo
+        );
+      }
+      if (context?.previousTodos) {
+        queryClient.setQueryData<Todo[]>(["todos"], context.previousTodos);
+      }
+      console.error("Error toggling todo:", err.message);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] })
+    onSettled: (_data, _error, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["todo", variables.id] });
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
-  })
-}
+  });
+};

@@ -1,13 +1,19 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { useParams } from 'react-router'
-import { todoApi } from '../api/todoApi'
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
+import { todoApi } from "../api/todoApi";
+import type { Todo } from "../types";
 
 export const useTodoQuery = () => {
-  const params = useParams()
-  return useSuspenseQuery({
-    queryKey: ['todo', params.id],
+  const params = useParams();
+  const todoId = Number(params.id);
+
+  return useSuspenseQuery<Todo, Error>({
+    queryKey: ["todo", todoId],
     queryFn: () => {
-      return todoApi.fetchTodo(Number(params.id))
+      if (!todoId || isNaN(todoId)) {
+        return Promise.reject(new Error("Invalid Todo ID"));
+      }
+      return todoApi.fetchTodo(todoId);
     },
-  })
-}
+  });
+};

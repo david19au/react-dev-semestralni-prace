@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
-import { todoApi } from '../api/todoApi'
+import { useQuery } from "@tanstack/react-query";
+import { todoApi } from "../api/todoApi";
 
 export const useTodosQuery = () => {
   return useQuery({
-    queryKey: ['todos'],
+    queryKey: ["todos"],
     queryFn: () => {
-      return todoApi.fetchTodos()
+      return todoApi.fetchTodos();
     },
-  })
-}
+  });
+};

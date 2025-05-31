@@ -1,4 +1,3 @@
-// src/components/todos/todos-section.tsx
 import { useState, useMemo, type ChangeEvent } from "react";
 import { TodoForm } from "./todo-form";
 import { TodoItem } from "./todo-item";
@@ -16,7 +15,7 @@ export const TodosSection = () => {
   };
 
   const filteredTodos = useMemo(() => {
-    if (!todos) return []; // If todos is undefined (e.g., during initial load before data arrives), return empty array
+    if (!todos) return [];
     if (!filterText) return todos;
 
     return todos.filter((todo: Todo) =>
@@ -24,7 +23,6 @@ export const TodosSection = () => {
     );
   }, [todos, filterText]);
 
-  // Determine if the original todos list is empty
   const isOriginalListEmpty = !todos || todos.length === 0;
 
   return (
@@ -41,7 +39,7 @@ export const TodosSection = () => {
           value={filterText}
           onChange={handleFilterChange}
           aria-label="Filter todos by name"
-          disabled={isLoading || (isOriginalListEmpty && !filterText)} // Disable filter if loading or if original list is empty and no filter applied
+          disabled={isLoading || (isOriginalListEmpty && !filterText)}
         />
       </div>
 
@@ -49,20 +47,17 @@ export const TodosSection = () => {
         {isLoading && <Spinner />}
 
         {!isLoading && error && (
-          // Error message is already handled above, but good to be explicit if needed here
           <p className="empty-state-message">Could not load todos.</p>
         )}
 
         {!isLoading && !error && (
           <>
-            {/* Case 1: Original list is empty, and no filter is applied */}
             {isOriginalListEmpty && !filterText && (
               <p className="empty-state-message">
                 You have no todos yet. Add one above!
               </p>
             )}
 
-            {/* Case 2: Original list has items, but filter yields no results */}
             {!isOriginalListEmpty &&
               filteredTodos.length === 0 &&
               filterText && (
@@ -71,7 +66,6 @@ export const TodosSection = () => {
                 </p>
               )}
 
-            {/* Case 3: There are filtered todos to display */}
             {filteredTodos.length > 0 && (
               <ul>
                 {filteredTodos.map((todo) => (

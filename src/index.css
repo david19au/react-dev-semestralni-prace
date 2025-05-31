@@ -500,6 +500,55 @@ footer {
   margin-bottom: 15px;
 }
 
+.todo-detail-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.light-theme .todo-detail-actions {
+  border-bottom-color: #e9ecef;
+}
+
+.todo-detail-actions button {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+}
+
+.todo-detail-actions .button-toggle {
+  background-color: var(--success);
+}
+.todo-detail-actions .button-toggle:hover {
+  background-color: #388e3c;
+}
+.light-theme .todo-detail-actions .button-toggle:hover {
+  background-color: #1e7e34;
+}
+
+.todo-detail-actions .button-undo {
+  background-color: var(--primary);
+}
+.todo-detail-actions .button-undo:hover {
+  background-color: var(--primary-hover);
+}
+
+.todo-detail-actions .button-delete {
+  background-color: var(--danger);
+}
+.todo-detail-actions .button-delete:hover {
+  background-color: #c03537;
+}
+.light-theme .todo-detail-actions .button-delete:hover {
+  background-color: #a71d2a;
+}
+
+.todo-detail-actions button:disabled {
+  opacity: 0.6;
+}
+
 .todo-detail-status .completed {
   color: var(--success);
   font-weight: bold;
@@ -538,9 +587,8 @@ footer {
 }
 
 .todo-description-form {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 0;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
