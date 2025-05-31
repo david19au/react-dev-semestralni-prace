@@ -263,6 +263,38 @@ li {
   justify-content: space-between;
   align-items: center;
   border: 1px solid transparent;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+li.todo-item-clickable {
+  cursor: pointer;
+}
+
+li.todo-item-clickable:hover,
+li.todo-item-clickable:focus {
+  background-color: var(--bg);
+  border-color: var(--primary);
+}
+.light-theme li.todo-item-clickable:hover,
+.light-theme li.todo-item-clickable:focus {
+  background-color: #e9ecef;
+  border-color: var(--primary-hover);
+}
+
+li span.todo-item-name {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+li.completed span.todo-item-name {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.todo-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 li span {
@@ -285,7 +317,6 @@ li button {
 li button.toggle {
   background-color: var(--success);
   color: #ffffff;
-  margin-left: 0.5rem;
 }
 
 .link {

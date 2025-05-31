@@ -1,5 +1,5 @@
-import { Header } from '../components/header'
-import { TodosSection } from '../components/todos/todos-section'
+import { Header } from "../components/header";
+import { TodosSection } from "../components/todos/todos-section";
 
 const TodoListPage = () => {
   return (
@@ -7,10 +7,10 @@ const TodoListPage = () => {
       <Header title="My Todo List" subtitle="Add your tasks" />
       <TodosSection />
       <footer>
-        <p>Click on a task to mark it as completed</p>
+        <p>Click on a task to see its details.</p>
       </footer>
     </>
-  )
-}
+  );
+};
 
-export default TodoListPage
+export default TodoListPage;
