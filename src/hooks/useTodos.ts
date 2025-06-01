@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { todoApi } from "../api/todoApi";
+import { todoApi, type TodoCreatePayload } from "../api/todoApi";
 import type { Todo } from "../types";
 
 export const useTodos = () => {
@@ -25,7 +25,8 @@ export const useTodos = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const newTodo = await todoApi.createTodo(todoName);
+      const payload: TodoCreatePayload = { name: todoName };
+      const newTodo = await todoApi.createTodo(payload);
       setTodos((prevTodos) => [...prevTodos, newTodo]);
     } catch (err) {
       console.error(err);

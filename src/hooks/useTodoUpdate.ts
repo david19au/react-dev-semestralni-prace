@@ -45,7 +45,8 @@ export const useTodoUpdate = () => {
       }
       console.error("Error updating todo:", err.message);
     },
-    onSettled: (data, error, { id }) => {
+    //TODO maybe need to check the data and error parameter if they are needed
+    onSettled: (_data, _error, { id }) => {
       queryClient.invalidateQueries({ queryKey: ["todo", id] });
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
