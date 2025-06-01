@@ -81,7 +81,7 @@ export const TodoForm = () => {
             value={priority}
             onChange={handlePriorityChange}
             name="todo-priority"
-            placeholder="e.g., 1 (lowest)"
+            placeholder="e.g., 0 (lowest)"
             min="0"
             max="5"
             disabled={isCreating}
