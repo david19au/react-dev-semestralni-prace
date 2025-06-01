@@ -11,6 +11,9 @@
   --success: #43b581;
   --radius: 12px;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --toggle-button-bg-dark-theme: #f0f0f0;
+  --toggle-button-text-dark-theme: #1a1b1e;
+  --toggle-button-border-dark-theme: #cccccc;
 }
 
 .light-theme {
@@ -25,6 +28,9 @@
   --success: #28a745;
   --radius: 12px;
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.075), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --toggle-button-bg-light-theme: #2c2d31;
+  --toggle-button-text-light-theme: #ffffff;
+  --toggle-button-border-light-theme: #424242;
 }
 
 * {
@@ -38,19 +44,23 @@
 .theme-toggle-button {
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
-  background-color: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--primary);
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
+  /* line-height: 1; */
   position: fixed;
   top: 1rem;
   right: 1rem;
   z-index: 1000;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease, transform 0.2s ease;
+  background-color: var(--toggle-button-bg-dark-theme);
+  color: var(--toggle-button-text-dark-theme);
+  border: 1px solid var(--toggle-button-border-dark-theme);
 }
 
 .theme-toggle-button:hover {
-  background-color: var(--bg-secondary);
+  background-color: #e0e0e0;
+  transform: scale(1.05);
 }
 
 body {
@@ -117,6 +127,17 @@ body {
 .light-theme .todo-detail-card {
   background-color: var(--surface);
   box-shadow: var(--shadow);
+}
+
+.light-theme .theme-toggle-button {
+  background-color: var(--toggle-button-bg-light-theme);
+  color: var(--toggle-button-text-light-theme);
+  border: 1px solid var(--toggle-button-border-light-theme);
+}
+
+.light-theme .theme-toggle-button:hover {
+  background-color: #3f3f44;
+  transform: scale(1.05);
 }
 
 body {
