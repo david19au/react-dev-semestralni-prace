@@ -744,3 +744,27 @@ footer {
     flex: 1;
   }
 }
+
+@media (max-width: 500px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+  .input-group button {
+    width: 100%;
+  }
+  .theme-toggle-button {
+    padding: auto;
+    font-size: 1rem;
+    top: 0.5rem;
+    right: 1.5rem;
+    width: auto;
+  }
+}
