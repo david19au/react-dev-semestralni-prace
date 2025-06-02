@@ -20,7 +20,7 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <Suspense fallback={<div>is loading</div>}>
+                  <Suspense fallback={<div>Page is loading</div>}>
                     <TodoListPage />
                   </Suspense>
                 }
